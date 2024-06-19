@@ -4,8 +4,13 @@ import {
   BrowserDynamicTestingModule,
   platformBrowserDynamicTesting
 } from '@angular/platform-browser-dynamic/testing';
+interface Person {
+    context(arg0: string, arg1: boolean, arg2: RegExp): unknown;
+    name: string;
+    age: number;
+  }
 
-declare const require: any;
+declare const require: Person;
 
 // Initialise l'environnement de test Angular.
 getTestBed().initTestEnvironment(
@@ -14,6 +19,5 @@ getTestBed().initTestEnvironment(
 );
 
 // Recherche tous les fichiers de test.
-const context = require.context('./', true, /\.spec\.ts$/);
-// Charge les modules de test.
-context.keys().map(context);
+export const context = require.context('./', true, /\.spec\.ts$/);
+
