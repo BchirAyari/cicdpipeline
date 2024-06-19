@@ -1,6 +1,7 @@
 // Karma configuration
 // Generated on Wed Jun 19 2024 09:31:11 GMT+0200 (heure d’été d’Europe centrale)
 
+
 module.exports = function(config) {
   config.set({
 
@@ -28,26 +29,20 @@ module.exports = function(config) {
     files: [
       { pattern: 'src/**/*.spec.ts', watched: false, type: 'module' } // Ajoutez cette ligne
     ],
-
-
-    // list of files / patterns to exclude
-    exclude: [
-    ],
-
+    preprocessors: {
+      
+    },
 
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://www.npmjs.com/search?q=keywords:karma-preprocessor
-    preprocessors: {
-      'src/**/*.spec.ts': ['webpack'] // Ajoutez cette ligne
-    },
+    
     mime: {
       'text/x-typescript': ['ts', 'tsx'] // Ajoutez cette ligne
     },
     
     coverageIstanbulReporter: {
       dir: require('path').join(__dirname, './coverage/pfe'),
-      reports: ['html', 'lcovonly', 'text-summary'],
-      fixWebpackSourcePaths: true
+      reports: ['html', 'lcovonly', 'text-summary']
     },
     // test results reporter to use
     // possible values: 'dots', 'progress'
@@ -79,11 +74,8 @@ module.exports = function(config) {
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-    singleRun: false,
-    
-    restartOnFileChange: true,
-    // Concurrency level
-    // how many browser instances should be started simultaneously
-    concurrency: Infinity
-  })
-}
+    singleRun: true,
+
+    restartOnFileChange: true
+  });
+};
