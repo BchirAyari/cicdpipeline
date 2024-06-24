@@ -1,21 +1,29 @@
 # first stage of building angular image
-FROM node:alpine AS build
-RUN mkdir -p /app
-WORKDIR /app
+FROM node:latest AS build
+#RUN mkdir -p /app
+WORKDIR /usr/local/app
 
 # Copy package.json and package-lock.json
-COPY package.json /app/
+COPY package*.json /usr/local/app/
 
 # Install Angular CLI and dependencies
 RUN npm install -g @angular/cli
 
 RUN npm install
 
-COPY . /app/
+COPY ./ /usr/local/app/
 
 # Build the Angular application
-RUN npm run build --prod
+RUN npm run build 
 
 #Final stage
-FROM nginx:alpine
-COPY --from=build /app/dist/pfe /usr/share/nginx/html
+FROM nginx:latest
+
+# Copier les fichiers de construction de votre application Angular dans le répertoire Nginx par défaut
+COPY --from=build /usr/local/app/dist/pfe/browser /usr/share/nginx/html
+
+# Copier le fichier de configuration personnalisé de Nginx
+COPY nginx.conf /etc/nginx/nginx.conf
+
+# Exposer le port 80
+EXPOSE 80

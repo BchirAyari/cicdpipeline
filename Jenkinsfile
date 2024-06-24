@@ -119,4 +119,17 @@ pipeline {
                 }
             }
     }
+
+    post{
+          always{
+                    emailext(
+        			subject: 'Deployment done with success',
+                    body: """Hello, Here are the details of the latest build: Best regards, Jenkins""",
+                    to: "bechirthethe@gmail.com",
+                    from: "jenkins@example.com",
+                    replyTo: "jenkins@example.com"
+        		        )
+                }
+          
+        }
 }
