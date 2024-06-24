@@ -23,7 +23,8 @@ FROM nginx:latest
 COPY --from=build /usr/local/app/dist/pfe/browser /usr/share/nginx/html
 
 # Copier le fichier de configuration personnalisé de Nginx
-COPY nginx.conf /etc/nginx/nginx.conf
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+#COPY nginx.conf /etc/nginx/nginx.conf
 
 # Exposer le port 80
 EXPOSE 80
